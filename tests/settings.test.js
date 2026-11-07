@@ -45,6 +45,8 @@ test("presets apply named Boolean sets and Custom preserves choices", () => {
   const balanced = Settings.applyPreset(Settings.DEFAULTS, "balanced");
   assert.equal(balanced.preset, "balanced");
   assert.equal(balanced.hideHomeFeed, true);
+  assert.equal(balanced.hideEndscreen, true);
+  assert.equal(balanced.hideCards, false);
   assert.equal(balanced.hideMixes, false);
   assert.equal(balanced.hideSearchShelves, false);
   assert.equal(balanced.disableAutoplay, false);

@@ -18,7 +18,7 @@ After changing extension files, return to `chrome://extensions` and press **Relo
 
 The default **Focus** preset hides the home feed, related videos, Shorts, end-screen suggestions and cards, Mix/radio shelves, and supplemental search shelves. It also turns off an enabled autoplay control once per player instance. Search results, the search box, video, title, and normal playback controls remain available.
 
-Choose **Balanced** for the core home/related/Shorts/end-screen hides without hiding Mixes or search shelves or disabling autoplay. **Custom** preserves your individual switches. The collapsed **More controls** group can optionally hide comments, live chat, video information, the buttons bar, channel, description, header, notifications, Explore/Trending, subscriptions, and promotional shelves.
+Choose **Balanced** for the home/related/Shorts/end-screen suggestion hides without hiding end-screen cards, Mixes, or search shelves or disabling autoplay. **Custom** preserves your individual switches. The collapsed **More controls** group can optionally hide comments, live chat, video information, the buttons bar, channel, description, header, notifications, Explore/Trending, subscriptions, and promotional shelves.
 
 The master switch temporarily restores the YouTube UI without erasing your preferences. On the home page, a small local panel offers Search and Subscriptions links when the feed is hidden. Settings changes apply to open YouTube pages without reloading them.
 
@@ -37,6 +37,8 @@ The `extension/` directory is the unpacked extension. It contains plain HTML, CS
 ```sh
 node --test
 ```
+
+Settings are stored as one schema-versioned `calmYtSettings` record. The content script maps each Boolean hide option from camelCase to a root `data-calm-*` attribute (for example, `hideRelated` becomes `data-calm-hide-related`); disabling the master switch removes only calm-yt-owned attributes.
 
 Repeatable fixture coverage is in `tests/fixtures/youtube-page.html`. Before release, also smoke-test a clean browser profile on desktop and mobile YouTube: Home → Search → Watch → another video → Back/Forward; toggle individual settings and the master switch; check autoplay on and already off; and verify captions, seeking, pause/play, volume, fullscreen, and manual navigation.
 

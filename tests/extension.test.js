@@ -17,6 +17,12 @@ test("Manifest V3 stays within the declared privacy and host boundaries", () => 
   assert.equal(manifest.content_scripts[0].all_frames, true);
   assert.equal(manifest.content_scripts[0].run_at, "document_start");
   assert.equal(manifest.content_scripts[0].js[0], "settings.js");
+  for (const size of [16, 48, 128]) {
+    const icon = `extension/icons/icon-${size}.png`;
+    assert.equal(manifest.icons[String(size)], `icons/icon-${size}.png`);
+    assert.equal(manifest.action.default_icon[String(size)], `icons/icon-${size}.png`);
+    assert.ok(fs.existsSync(path.join(root, icon)), `missing local icon ${icon}`);
+  }
   assert.equal("background" in manifest, false);
   assert.equal("web_accessible_resources" in manifest, false);
 });
@@ -87,4 +93,15 @@ test("extension source has no remote fetch or third-party assets", () => {
     assert.doesNotMatch(source, /https?:\/\//i, `${file} contains a remote URL`);
     assert.doesNotMatch(source, /\bfetch\s*\(|XMLHttpRequest|WebSocket\s*\(/, `${file} contains a network API`);
   }
+});
+
+test("content observers have bounded lifetimes and explicit cleanup paths", () => {
+  const content = read("extension/content.js");
+  assert.equal((content.match(/new MutationObserver\(/g) || []).length, 3);
+  assert.match(content, /homeObserver\.disconnect\(\)/);
+  assert.match(content, /entry\.observer\.disconnect\(\)/);
+  assert.match(content, /routeObserver\?\.disconnect\(\)/);
+  assert.match(content, /setTimeout\(stopHomeObserver, 12000\)/);
+  assert.match(content, /setTimeout\(\(\) => \{[\s\S]*?stopPlayerObserver\(player\)/);
+  assert.match(content, /for \(const eventName of \[[\s\S]*?document\.addEventListener\(eventName/);
 });

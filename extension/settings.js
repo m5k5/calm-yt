@@ -51,7 +51,7 @@
       hideRelated: true,
       hideShorts: true,
       hideEndscreen: true,
-      hideCards: true,
+      hideCards: false,
       hideMixes: false,
       hideSearchShelves: false,
       disableAutoplay: false

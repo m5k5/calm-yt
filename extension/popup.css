@@ -7,7 +7,7 @@
 }
 
 * { box-sizing: border-box; }
-body { width: 340px; min-width: 300px; margin: 0; }
+body { width: min(360px, 100vw); min-width: min(300px, 100vw); margin: 0; }
 .popup { padding: 18px 18px 12px; }
 .topbar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
 .eyebrow { margin: 0 0 2px; color: #62746a; font-size: 10px; letter-spacing: .08em; text-transform: uppercase; }

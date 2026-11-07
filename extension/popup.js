@@ -9,6 +9,9 @@
   const presetInputs = [...document.querySelectorAll('input[name="preset"]')];
   let current = null;
   let statusTimer;
+  let saveRevision = 0;
+  let saveQueue = Promise.resolve();
+  let pendingSaves = 0;
 
   function render(settings) {
     current = settings;
@@ -30,16 +33,28 @@
     if (!settings.enabled) advanced.open = false;
   }
 
-  async function save(settings, message) {
-    try {
-      render(await writeSettings(settings));
+  function save(settings, message) {
+    // Update the source of truth synchronously so a second quick change is
+    // based on the first one, then serialize writes to preserve that order.
+    current = settings;
+    render(settings);
+    const revision = ++saveRevision;
+    pendingSaves += 1;
+    const pending = saveQueue.then(() => writeSettings(settings));
+    saveQueue = pending.catch(() => {});
+    pending.then((saved) => {
+      pendingSaves -= 1;
+      if (revision !== saveRevision) return;
+      render(saved);
       status.textContent = message || "Saved — open YouTube pages update automatically.";
       clearTimeout(statusTimer);
       statusTimer = setTimeout(() => { status.textContent = ""; }, 2400);
-    } catch (error) {
+    }, (error) => {
+      pendingSaves -= 1;
+      if (revision !== saveRevision) return;
       status.textContent = "Could not save settings. Check extension storage permissions.";
       console.error("calm-yt: settings save failed", error);
-    }
+    });
   }
 
   enabledInput.addEventListener("change", () => {
@@ -64,6 +79,7 @@
 
   chrome.storage.onChanged.addListener((changes, areaName) => {
     if (areaName !== "local" || !changes[STORAGE_KEY]) return;
+    if (pendingSaves > 0) return;
     render(globalThis.CalmSettings.normalizeSettings(changes[STORAGE_KEY].newValue));
   });
 
