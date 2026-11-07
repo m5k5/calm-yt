@@ -1,0 +1,32 @@
+<!doctype html>
+<html data-calm-enabled="true" data-calm-hide-home-feed="true">
+  <head><meta charset="utf-8"><title>YouTube UI fixture</title></head>
+  <body>
+    <ytd-masthead><input id="search" aria-label="Search"></ytd-masthead>
+    <ytd-browse page-subtype="home" id="home">
+      <div id="primary">
+        <ytd-rich-grid-renderer><ytd-rich-item-renderer>Home recommendation</ytd-rich-item-renderer></ytd-rich-grid-renderer>
+        <section class="calm-yt-home-state"><h2>Your home feed is hidden</h2><a href="/results?search_query=">Search YouTube</a><a href="/feed/subscriptions">Subscriptions</a></section>
+      </div>
+    </ytd-browse>
+    <ytd-watch-flexy>
+      <div id="movie_player" class="html5-video-player">
+        <button class="ytp-play-button" aria-label="Play"></button>
+        <div class="ytp-time-slider" role="slider"></div>
+        <div class="ytp-endscreen-content">Suggested video</div>
+        <div class="ytp-cards-teaser">Card</div>
+      </div>
+      <div id="related"><ytd-watch-next-secondary-results-renderer>Related</ytd-watch-next-secondary-results-renderer></div>
+      <ytd-video-primary-info-renderer>Video title and information</ytd-video-primary-info-renderer>
+      <ytd-comments></ytd-comments>
+    </ytd-watch-flexy>
+    <ytd-reel-shelf-renderer>Shorts</ytd-reel-shelf-renderer>
+    <ytd-radio-renderer>Mix</ytd-radio-renderer>
+    <ytd-search><ytd-shelf-renderer>Supplemental shelf</ytd-shelf-renderer><ytd-video-renderer>Primary result</ytd-video-renderer></ytd-search>
+    <ytm-browse><ytm-rich-grid-renderer><ytm-rich-item-renderer>Mobile home recommendation</ytm-rich-item-renderer></ytm-rich-grid-renderer></ytm-browse>
+    <ytm-player><button aria-label="Autoplay" aria-pressed="true">Autoplay</button></ytm-player>
+    <ytm-watch-next-secondary-results-renderer>Mobile related videos</ytm-watch-next-secondary-results-renderer>
+    <ytm-reel-shelf-renderer>Mobile Shorts</ytm-reel-shelf-renderer>
+    <ytm-search><ytm-shelf-renderer>Mobile supplemental shelf</ytm-shelf-renderer><ytm-video-renderer>Mobile primary result</ytm-video-renderer></ytm-search>
+  </body>
+</html>

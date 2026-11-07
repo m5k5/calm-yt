@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>calm-yt</title>
+    <link rel="stylesheet" href="popup.css">
+  </head>
+  <body>
+    <main class="popup">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">A little more intention</p>
+          <h1>calm-yt</h1>
+        </div>
+        <label class="master-control" for="enabled">
+          <span class="sr-only">Enable calm-yt</span>
+          <input id="enabled" type="checkbox" role="switch">
+          <span class="switch" aria-hidden="true"></span>
+          <span class="master-state" id="master-state">On</span>
+        </label>
+      </header>
+
+      <fieldset class="presets" id="presets">
+        <legend>Choose your pace</legend>
+        <label><input type="radio" name="preset" value="focus"><span>Focus</span></label>
+        <label><input type="radio" name="preset" value="balanced"><span>Balanced</span></label>
+        <label><input type="radio" name="preset" value="custom"><span>Custom</span></label>
+      </fieldset>
+
+      <section class="settings-section" aria-labelledby="recommendations-title">
+        <h2 id="recommendations-title">Recommendations</h2>
+        <div class="setting-list">
+          <label class="setting"><span>Home feed</span><input type="checkbox" data-setting="hideHomeFeed"></label>
+          <label class="setting"><span>Related videos</span><input type="checkbox" data-setting="hideRelated"></label>
+          <label class="setting"><span>Shorts</span><input type="checkbox" data-setting="hideShorts"></label>
+          <label class="setting"><span>End-screen suggestions</span><input type="checkbox" data-setting="hideEndscreen"></label>
+          <label class="setting"><span>End-screen cards</span><input type="checkbox" data-setting="hideCards"></label>
+          <label class="setting"><span>Mixes &amp; radio</span><input type="checkbox" data-setting="hideMixes"></label>
+          <label class="setting"><span>Search suggestion shelves</span><input type="checkbox" data-setting="hideSearchShelves"></label>
+        </div>
+      </section>
+
+      <section class="settings-section playback" aria-labelledby="playback-title">
+        <h2 id="playback-title">Playback</h2>
+        <label class="setting"><span>Disable autoplay</span><input type="checkbox" data-setting="disableAutoplay"></label>
+      </section>
+
+      <details class="advanced">
+        <summary>More controls</summary>
+        <div class="setting-list advanced-list">
+          <label class="setting"><span>Comments</span><input type="checkbox" data-setting="hideComments"></label>
+          <label class="setting"><span>Live chat</span><input type="checkbox" data-setting="hideLiveChat"></label>
+          <label class="setting"><span>Video information</span><input type="checkbox" data-setting="hideVideoInfo"></label>
+          <label class="setting"><span>Buttons bar</span><input type="checkbox" data-setting="hideButtonsBar"></label>
+          <label class="setting"><span>Channel</span><input type="checkbox" data-setting="hideChannel"></label>
+          <label class="setting"><span>Description</span><input type="checkbox" data-setting="hideDescription"></label>
+          <label class="setting"><span>Top header</span><input type="checkbox" data-setting="hideHeader"></label>
+          <label class="setting"><span>Notifications</span><input type="checkbox" data-setting="hideNotifications"></label>
+          <label class="setting"><span>Explore &amp; Trending</span><input type="checkbox" data-setting="hideExplore"></label>
+          <label class="setting"><span>Subscriptions</span><input type="checkbox" data-setting="hideSubscriptions"></label>
+          <label class="setting"><span>Promotional shelves</span><input type="checkbox" data-setting="hidePromotions"></label>
+        </div>
+      </details>
+
+      <p class="helper">Turn off any option to bring that part of YouTube back.</p>
+      <p class="status" id="status" role="status" aria-live="polite"></p>
+    </main>
+    <script src="settings.js"></script>
+    <script src="popup.js"></script>
+  </body>
+</html>

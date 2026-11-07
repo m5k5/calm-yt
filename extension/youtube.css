@@ -1,0 +1,87 @@
+/* Every rule is gated by the extension-owned root bridge. Removing the
+   attributes restores YouTube's presentation without modifying its DOM. */
+
+/* Home recommendation feed — keep the page shell and search/navigation intact. */
+html[data-calm-enabled="true"][data-calm-hide-home-feed="true"] ytd-browse[page-subtype="home"] ytd-rich-grid-renderer,
+html[data-calm-enabled="true"][data-calm-hide-home-feed="true"] ytd-browse[page-subtype="home"] ytd-rich-item-renderer,
+html[data-calm-enabled="true"][data-calm-hide-home-feed="true"] ytm-browse[page-subtype="home"] ytm-rich-grid-renderer,
+html[data-calm-enabled="true"][data-calm-hide-home-feed="true"] ytm-browse[page-subtype="home"] ytm-rich-item-renderer,
+html[data-calm-enabled="true"][data-calm-home-route="true"][data-calm-hide-home-feed="true"] ytm-browse ytm-rich-grid-renderer,
+html[data-calm-enabled="true"][data-calm-home-route="true"][data-calm-hide-home-feed="true"] ytm-browse ytm-rich-item-renderer { display: none !important; }
+
+/* Related videos only; do not hide the watch page or player column. */
+html[data-calm-enabled="true"][data-calm-hide-related="true"] #related,
+html[data-calm-enabled="true"][data-calm-hide-related="true"] ytd-watch-next-secondary-results-renderer,
+html[data-calm-enabled="true"][data-calm-hide-related="true"] ytm-watch-next-secondary-results-renderer,
+html[data-calm-enabled="true"][data-calm-hide-related="true"] ytm-item-section-renderer[section-identifier="related-items"] { display: none !important; }
+
+/* Shorts navigation and content surfaces. :has() variants are optional fallbacks. */
+html[data-calm-enabled="true"][data-calm-hide-shorts="true"] ytd-reel-shelf-renderer,
+html[data-calm-enabled="true"][data-calm-hide-shorts="true"] ytd-reel-item-renderer,
+html[data-calm-enabled="true"][data-calm-hide-shorts="true"] ytm-reel-shelf-renderer,
+html[data-calm-enabled="true"][data-calm-hide-shorts="true"] ytm-shorts-lockup-view-model,
+html[data-calm-enabled="true"][data-calm-hide-shorts="true"] a[href^="/shorts/"],
+html[data-calm-enabled="true"][data-calm-hide-shorts="true"] ytd-guide-entry-renderer:has(a[href="/shorts"]),
+html[data-calm-enabled="true"][data-calm-hide-shorts="true"] ytm-pivot-bar-item-renderer:has(a[href="/shorts"]) { display: none !important; }
+
+/* End-screen suggestion wall, separate from ordinary player controls. */
+html[data-calm-enabled="true"][data-calm-hide-endscreen="true"] #movie_player .ytp-endscreen-content,
+html[data-calm-enabled="true"][data-calm-hide-endscreen="true"] #movie_player .ytp-ce-element,
+html[data-calm-enabled="true"][data-calm-hide-endscreen="true"] ytm-engagement-panel-section-list-renderer[target-id="engagement-panel-endscreen"] { display: none !important; }
+html[data-calm-enabled="true"][data-calm-hide-cards="true"] #movie_player .ytp-cards-teaser,
+html[data-calm-enabled="true"][data-calm-hide-cards="true"] #movie_player .ytp-cards-button { display: none !important; }
+
+/* Mix and radio shelves. */
+html[data-calm-enabled="true"][data-calm-hide-mixes="true"] ytd-radio-renderer,
+html[data-calm-enabled="true"][data-calm-hide-mixes="true"] ytm-radio-renderer,
+html[data-calm-enabled="true"][data-calm-hide-mixes="true"] ytd-compact-radio-renderer,
+html[data-calm-enabled="true"][data-calm-hide-mixes="true"] ytd-rich-shelf-renderer:has(a[href*="start_radio"]),
+html[data-calm-enabled="true"][data-calm-hide-mixes="true"] ytd-compact-video-renderer:has(a[href*="start_radio"]) { display: none !important; }
+
+/* Supplemental search shelves only; primary search result renderers remain visible. */
+html[data-calm-enabled="true"][data-calm-hide-search-shelves="true"] ytd-search ytd-shelf-renderer,
+html[data-calm-enabled="true"][data-calm-hide-search-shelves="true"] ytd-search ytd-horizontal-card-list-renderer,
+html[data-calm-enabled="true"][data-calm-hide-search-shelves="true"] ytm-search ytm-shelf-renderer,
+html[data-calm-enabled="true"][data-calm-hide-search-shelves="true"] ytm-search ytm-compact-station-renderer { display: none !important; }
+
+/* Optional independent controls. */
+html[data-calm-enabled="true"][data-calm-hide-comments="true"] ytd-comments,
+html[data-calm-enabled="true"][data-calm-hide-comments="true"] ytm-comment-section-renderer,
+html[data-calm-enabled="true"][data-calm-hide-comments="true"] ytm-comments-entry-point-header-renderer { display: none !important; }
+html[data-calm-enabled="true"][data-calm-hide-live-chat="true"] #chat,
+html[data-calm-enabled="true"][data-calm-hide-live-chat="true"] ytd-live-chat-frame,
+html[data-calm-enabled="true"][data-calm-hide-live-chat="true"] ytm-live-chat-frame { display: none !important; }
+html[data-calm-enabled="true"][data-calm-hide-video-info="true"] ytd-watch-metadata,
+html[data-calm-enabled="true"][data-calm-hide-video-info="true"] ytm-slim-video-metadata-section-renderer { display: none !important; }
+html[data-calm-enabled="true"][data-calm-hide-buttons-bar="true"] #top-level-buttons-computed,
+html[data-calm-enabled="true"][data-calm-hide-buttons-bar="true"] ytm-slim-video-action-bar-renderer { display: none !important; }
+html[data-calm-enabled="true"][data-calm-hide-channel="true"] #owner,
+html[data-calm-enabled="true"][data-calm-hide-channel="true"] ytm-channel-name { display: none !important; }
+html[data-calm-enabled="true"][data-calm-hide-description="true"] #description,
+html[data-calm-enabled="true"][data-calm-hide-description="true"] ytm-video-description-header-renderer { display: none !important; }
+html[data-calm-enabled="true"][data-calm-hide-header="true"] ytd-masthead,
+html[data-calm-enabled="true"][data-calm-hide-header="true"] ytm-mobile-topbar-renderer { display: none !important; }
+html[data-calm-enabled="true"][data-calm-hide-notifications="true"] ytd-notification-topbar-button-renderer,
+html[data-calm-enabled="true"][data-calm-hide-notifications="true"] ytm-notification-topbar-button-renderer { display: none !important; }
+html[data-calm-enabled="true"][data-calm-hide-explore="true"] ytd-guide-entry-renderer:has(a[href^="/feed/explore"]),
+html[data-calm-enabled="true"][data-calm-hide-explore="true"] ytd-guide-entry-renderer:has(a[href="/feed/trending"]),
+html[data-calm-enabled="true"][data-calm-hide-explore="true"] ytm-pivot-bar-item-renderer:has(a[href^="/feed/explore"]),
+html[data-calm-enabled="true"][data-calm-hide-explore="true"] ytm-pivot-bar-item-renderer:has(a[href="/feed/trending"]) { display: none !important; }
+html[data-calm-enabled="true"][data-calm-hide-subscriptions="true"] ytd-guide-entry-renderer:has(a[href^="/feed/subscriptions"]),
+html[data-calm-enabled="true"][data-calm-hide-subscriptions="true"] ytm-pivot-bar-item-renderer:has(a[href^="/feed/subscriptions"]),
+html[data-calm-enabled="true"][data-calm-hide-subscriptions="true"] ytd-browse[page-subtype="subscriptions"] ytd-rich-grid-renderer,
+html[data-calm-enabled="true"][data-calm-hide-subscriptions="true"] ytm-browse[page-subtype="subscriptions"] ytm-rich-grid-renderer { display: none !important; }
+html[data-calm-enabled="true"][data-calm-hide-promotions="true"] ytd-merch-shelf-renderer,
+html[data-calm-enabled="true"][data-calm-hide-promotions="true"] ytd-ticket-shelf-renderer,
+html[data-calm-enabled="true"][data-calm-hide-promotions="true"] ytd-offer-module-renderer,
+html[data-calm-enabled="true"][data-calm-hide-promotions="true"] ytd-donation-shelf-renderer,
+html[data-calm-enabled="true"][data-calm-hide-promotions="true"] ytm-merch-shelf-renderer { display: none !important; }
+
+/* Local home state is intentionally not a YouTube renderer or recommendation. */
+.calm-yt-home-state { max-width: 660px; margin: 28px auto; padding: 30px 24px; border: 1px solid #dce8df; border-radius: 14px; color: #20372b; background: #f2f8f3; font: 14px/1.5 system-ui, sans-serif; text-align: center; }
+.calm-yt-home-state__eyebrow { margin: 0 0 7px; color: #4d765c; font-size: 11px; font-weight: 700; letter-spacing: .09em; text-transform: uppercase; }
+.calm-yt-home-state h2 { margin: 0 0 7px; font-size: 21px; }
+.calm-yt-home-state p { margin: 0 0 16px; }
+.calm-yt-home-state nav { display: flex; justify-content: center; gap: 10px; }
+.calm-yt-home-state a { padding: 8px 13px; border-radius: 7px; color: #fff; background: #26734d; font-weight: 650; text-decoration: none; }
+.calm-yt-home-state a:focus-visible { outline: 3px solid #173f2b; outline-offset: 2px; }
